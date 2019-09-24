@@ -2,6 +2,8 @@ package staffmanagementproject;
 
 import java.time.LocalDate;
 import static java.time.temporal.ChronoUnit.YEARS;
+import java.util.ArrayList;
+import java.util.Collections;
 import models.Developer;
 import models.Employee;
 import models.Marketing;
@@ -34,8 +36,16 @@ public class EmployeeStatistics {
     
         public static void allSalaries(){
         System.out.println("\nAll salaries:\n");
-        for (Employee currentEmployee : employeeList) {
-            System.out.println(currentEmployee.getName() + " " + String.format("%,.2f", currentEmployee.getSalary()));
+        ArrayList<Employee> sortedEmployeeList=new ArrayList<>(employeeList);
+       
+        Collections.sort(sortedEmployeeList);
+        System.out.println("ID");  
+        for (Employee currentEmployee : sortedEmployeeList) {
+            
+            String[] nameSplit = currentEmployee.getName().split(" ");
+            System.out.println(fixLength(Integer.toString(currentEmployee.getID()), 5) 
+                    + fixLength(nameSplit[0], 10) + fixLength(nameSplit[1], 12) 
+                    + String.format("%,.2f", currentEmployee.getSalary()));
         }
     }
 
@@ -70,8 +80,9 @@ public class EmployeeStatistics {
 
     public static void sumBonus() {
         double totBonus = 0;
+        System.out.println("Name:                Bonus:");
         for (Employee currentEmployee : employeeList) {
-            System.out.println(currentEmployee.getName() + " " + String.format("%,.2f", currentEmployee.bonus()));
+            System.out.println(String.format("%-20s %,.2f", currentEmployee.getName(),currentEmployee.bonus()));
             totBonus += currentEmployee.bonus();
         }
         System.out.println("---------------");
@@ -81,13 +92,15 @@ public class EmployeeStatistics {
 
     public static void showAges() {
         double totAge = 0;
+        System.out.println("Name:                Age:");
         for (Employee employee : employeeList) {
             LocalDate x = employee.getBirthdate();
             LocalDate y = LocalDate.now();
             long ageInYears = YEARS.between(x, y);
             totAge += ageInYears;
-            System.out.println(employee.getName() + " " + ageInYears + " years old");
+            System.out.println(String.format("%-20s %d",employee.getName(),ageInYears));
         }
+        System.out.println("---------------");
         System.out.printf("Average age at company: %.1f\n", totAge / employeeList.size());
     }
 
@@ -109,6 +122,15 @@ public class EmployeeStatistics {
             System.out.println("Number of people with unknown gender: " + unknown+" ("+String.format("%.2f", unknown*porcentage)+"%)");
             
         }
+    }
+    
+    private static String fixLength(String s, int i) {
+        if (s.length() < i) {
+            for (int j = s.length(); j < i; j++) {
+                s = s + " ";
+            }
+        }
+        return s;
     }
 
 }

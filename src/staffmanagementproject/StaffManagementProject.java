@@ -114,6 +114,7 @@ public class StaffManagementProject {
         if (employee == null) {
             return;
         }
+        
         System.out.println("1: Update name");
         System.out.println("2. Update salary");
         System.out.println("3: Update birthdate");

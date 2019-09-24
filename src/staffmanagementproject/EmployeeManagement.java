@@ -26,8 +26,7 @@ public class EmployeeManagement {
         GenderType gender = GenderType.valueOf(sc.nextLine().toUpperCase());
 
         System.out.println("Enter salary: ");
-        String input = sc.nextLine().replace(" ", "");
-        double salary = Double.parseDouble(input);
+        double salary = Double.parseDouble(sc.nextLine().replace(" ", ""));
 
         System.out.println("Choose job position: ");
 
@@ -68,7 +67,7 @@ public class EmployeeManagement {
         if (jobChoice > 0 && jobChoice < 5) {
             System.out.println("Employee added:");
             System.out.println(employeeList.get(employeeList.size() - 1));
-            
+
         }
     }
 
@@ -140,9 +139,8 @@ public class EmployeeManagement {
         for (Employee employee : employeeList) {
             if (employee.getID() == ID) {
                 System.out.println(employee.getName() + " Current salary: " + String.format("%,.2f", employee.getSalary()));
-                System.out.print("New salary: ");
-                double updateSalary = sc.nextDouble();
-                employee.setSalary(updateSalary);
+                System.out.print("New salary: ");              
+                employee.setSalary(Double.parseDouble(sc.nextLine().replace(" ", "")));
                 System.out.println("Current salary: " + String.format("%,.2f", employee.getSalary()));
                 return;
             }
@@ -203,7 +201,7 @@ public class EmployeeManagement {
     }
 
     public static void updateDeveloperLevel(Employee employee) {
-        System.out.println("Current developerLevel: "+((Developer) employee).getDeveloperLevel());
+        System.out.println("Current developerLevel: " + ((Developer) employee).getDeveloperLevel());
         System.out.println("Enter new developerLevel: (Junior/Senior)");
         DeveloperLevel level = DeveloperLevel.valueOf(StaffManagementProject.sc.nextLine().toUpperCase());
         ((Developer) employee).setDeveloperLevel(level);
@@ -270,12 +268,12 @@ public class EmployeeManagement {
         if (customers.contains(customer)) {
             System.out.println("Current budget: " + String.format("%,d", Marketing.getBudget()));
             System.out.println("How much budget has been spent for the customer?");
-            Marketing.setBudget(Marketing.getBudget() - Math.abs(sc.nextInt()));
+            Marketing.setBudget(Marketing.getBudget() - Math.abs(Integer.parseInt(sc.nextLine().replace(" ", ""))));
             System.out.println("Current budget: " + String.format("%,d", Marketing.getBudget()));
-            sc.nextLine();
         } else {
             System.out.println("Customer not found");
         }
+       
 
     }
 
@@ -284,11 +282,11 @@ public class EmployeeManagement {
         Developer developer1 = new Developer("Java", DeveloperLevel.SENIOR, 34155, "Joel Ståldal", "1989-03-10", GenderType.MALE);
         Developer developer2 = new Developer("Java", DeveloperLevel.JUNIOR, 32248, "Sandra Isaksson", "1983-01-29", GenderType.FEMALE);
         Marketing marketing1 = new Marketing(41700, "Lena Andersson", "1977-03-10", GenderType.FEMALE);
-        Marketing marketing2 = new Marketing(21700, "Maja Karlsson", "1996-03-10", GenderType.FEMALE);
+        Marketing marketing2 = new Marketing(21500, "Maja Karlsson", "1996-03-10", GenderType.FEMALE);
         Technician technician1 = new Technician(2, 43300, "Olle Pettersson", "1952-05-01", GenderType.MALE);
         Technician technician2 = new Technician(5, 33700, "Eva Berg", "1966-08-02", GenderType.FEMALE);
         WebDesigner webdesigner1 = new WebDesigner(29500, "Kalle Svensson", "2001-04-03", GenderType.MALE);
-        WebDesigner webdesigner2 = new WebDesigner(21500, "Ivan Pålsson", "1999-03-29", GenderType.MALE);
+        WebDesigner webdesigner2 = new WebDesigner(21700, "Ivan Pålsson", "1999-03-29", GenderType.MALE);
 
         webdesigner1.getWebsites().add("google.com");
         webdesigner1.getWebsites().add("facebook.com");
