@@ -82,7 +82,7 @@ public abstract class Employee implements Comparable<Employee> {
     
     @Override
     public int compareTo (Employee e){
-        return (int)(this.getSalary()-e.getSalary());
+        return Double.compare(this.salary,e.salary);
     }
 
 }
